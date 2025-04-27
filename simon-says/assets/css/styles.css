@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+@import url('../../src/components/header/header.css');
+@import url('../../src/components/main/main.css');
+@import url('../../src/components/button/button.css');
+@import url('../../src/components/keyboard-section/keyboard-section.css');
+
+body {
+  background: linear-gradient(90deg, #712cf9, #e31d80);
+  background-size: cover;
+  background-position: center center;
+}
