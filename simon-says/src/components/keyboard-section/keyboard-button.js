@@ -34,11 +34,8 @@ export function createGridItem(gridItemText) {
   return gridItem;
 }
 
-export function createKeyboardButton() {
-  setTimeout(() => {
-    const gridContainer = document.querySelector('.grid-container');
-    for (let i = 0; i < numbers.length; i += 1) {
-      gridContainer.append(createGridItem(numbers[i]));
-    }
-  }, 300);
+export function createKeyboardButton(gridContainer) {
+  for (let i = 0; i < numbers.length; i += 1) {
+    gridContainer.append(createGridItem(numbers[i]));
+  }
 }

@@ -2,6 +2,8 @@ import { createHtmlElement } from '../html-element/html-element.js';
 import { createButton } from '../button/button.js';
 import { createSelectElement } from '../select-element/select-element.js';
 import { createKeyboard } from '../keyboard-section/keyboard-section.js';
+import { createButtonsSet } from '../buttons-set/buttons-set.js';
+import { createRoundNumberCard } from '../../components/round-number-card/round-number-card.js'
 
 export function createMain() {
   const main = createHtmlElement('main');
@@ -10,19 +12,24 @@ export function createMain() {
     'div',
     'controls-section__container'
   );
+  const controlsSectionContent = createHtmlElement('div', 'controls-section-content');
   const controlsSectionElements = createHtmlElement(
     'div',
     'control-section__elements'
   );
 
   const selectElement = createSelectElement();
-  const startButton = createButton('button', 'start-btn', 'Start');
+  const startButton = createButton(['button', 'start-btn', 'Start']);
+  startButton.addEventListener('click', () => {
+    createRoundNumberCard();
+    createButtonsSet(['button', 'repeat-sequence__button', 'Repeat Sequence'],
+      ['button', 'new-game__button', 'New Game']);
+  });
   const keyboardSection = createKeyboard();
-
-  controlsSectionElements.append(selectElement, startButton, keyboardSection);
-
-  controlsSectionContainer.append(controlsSectionElements);
+  controlsSectionElements.append(selectElement);
+  controlsSectionContent.append(controlsSectionElements, startButton);
+  controlsSectionContainer.append(controlsSectionContent);
   controlsSection.append(controlsSectionContainer);
-  main.append(controlsSection);
-  document.body.appendChild(main);
+  main.append(controlsSection, keyboardSection);
+  document.body.append(main);
 }

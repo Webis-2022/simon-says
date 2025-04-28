@@ -1,6 +1,7 @@
 .control-section__elements {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  /* flex-direction: column; */
   margin-top: 50px;
 }
 
