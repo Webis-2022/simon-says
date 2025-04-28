@@ -1,11 +1,8 @@
-.start-btn {
-  margin-top: 80px;
-  margin-bottom: 80px;
-  font-weight: 500;
+.start-btn,
+.repeat-sequence__button,
+.new-game__button {
   display: flex;
   justify-content: center;
-  background-color: #0d6efd;
-  width: 50%;
   padding: 1rem;
   border: none;
   outline: none;
@@ -14,5 +11,18 @@
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
-  align-self: center;
+}
+
+.start-btn {
+  width: 50%;
+  background-color: #0d6efd;
+  margin: 80px auto;
+}
+
+.repeat-sequence__button,
+.new-game__button {
+  width: 100%;
+  margin-right: 15px;
+  background: transparent;
+  border: solid 3px #fff;
 }

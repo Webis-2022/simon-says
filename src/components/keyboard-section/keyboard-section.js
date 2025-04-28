@@ -8,11 +8,9 @@ export function createKeyboard() {
     'keyboard-section__content'
   );
   const gridContainer = createHtmlElement('div', 'grid-container');
-
-  // gridContainer.append(createKeyboardButton());
-  createKeyboardButton();
-  keyboardSectionContent.appendChild(gridContainer);
-  keyboardSection.appendChild(keyboardSectionContent);
+  createKeyboardButton(gridContainer);
+  keyboardSectionContent.append(gridContainer);
+  keyboardSection.append(keyboardSectionContent);
   return keyboardSection;
 }
 

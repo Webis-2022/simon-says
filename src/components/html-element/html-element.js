@@ -3,7 +3,7 @@ export function createHtmlElement(tag, className = '', text = '') {
   if (className) {
     element.classList.add(className);
   }
-  if (text) {
+  if (typeof text === 'string' && text.length > 0) {
     element.textContent = text;
   }
   return element;
