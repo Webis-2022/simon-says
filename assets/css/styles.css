@@ -5,7 +5,7 @@
 @import url('../../src/components/keyboard-section/keyboard-section.css');
 @import url('../../src/components/buttons-set/buttons-set.css');
 @import url('../../src/components/round-number-card/round-number-card.css');
-
+@import url('../../src/components/sequence-input/sequence-input.css');
 
 body {
   background: linear-gradient(90deg, #712cf9, #e31d80);
