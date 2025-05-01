@@ -19,12 +19,9 @@ export async function runGame(difficultyLevel) {
         const randomButton = numbers[index];
         randomButtonsArr.push(randomButton);
         savedRandomButtonsArr = randomButtonsArr;
-        console.log('---', savedRandomButtonsArr);
         await highlightButton(randomButton);
       }
       await new Promise((resolve) => {
-        clickedButtonsArr.length = 0;
-        console.log('3', clickedButtonsArr);
         clickVirtualKeyboardButton(resolve);
       });
       i += 2;

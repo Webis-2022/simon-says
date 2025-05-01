@@ -21,4 +21,6 @@
 .select {
   margin-left: 15px;
   min-width: 200px;
+  border-radius: 20px;
+  padding: 0.6rem;
 }
