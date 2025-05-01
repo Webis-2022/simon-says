@@ -1,5 +1,7 @@
 import { createHtmlElement } from '../html-element/html-element.js';
 import { createButton } from '../button/button.js';
+import { repeatSequence } from '../../utils/repeat-sequence.js';
+import { restartGame } from '../../utils/restart-game.js';
 
 export function createButtonsSet(firstButton, secondButton) {
   const controlSectionElements = document.querySelector(
@@ -7,7 +9,9 @@ export function createButtonsSet(firstButton, secondButton) {
   );
   const buttonsSet = createHtmlElement('div', 'buttons-set');
   const firstBtn = createButton(firstButton);
+  firstBtn.addEventListener('click', repeatSequence);
   const secondBtn = createButton(secondButton);
+  secondBtn.addEventListener('click', restartGame);
 
   buttonsSet.append(firstBtn, secondBtn);
   controlSectionElements.insertAdjacentElement('beforeend', buttonsSet);
