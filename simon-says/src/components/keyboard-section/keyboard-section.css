@@ -22,3 +22,32 @@
   border-radius: 0.375rem;
   cursor: pointer;
 }
+
+@media (max-width: 620px) {
+  .item {
+    width: 37px;
+    height: 37px;
+  }
+
+  .btn-warning,
+  .btn-success {
+    margin-right: 0;
+  }
+
+  .control-section__elements {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 500px) {
+  .grid-container {
+    gap: 8px;
+  }
+
+  .item {
+    width: 27px;
+    height: 27px;
+  }
+}

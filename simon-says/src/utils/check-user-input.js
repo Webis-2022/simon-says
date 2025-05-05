@@ -5,6 +5,11 @@ import { animateRoundNumberCard } from './animate-round-number-card.js';
 import { changeRoundCardNumber } from '../utils/change-round-card-number.js';
 import { clickVirtualKeyboardButton } from './click-virtual-keyboard-button.js';
 import { repeatSequence } from './repeat-sequence.js';
+import {
+  removeVirtualKeyboardListeners,
+  itemClickHandler,
+} from './click-virtual-keyboard-button.js';
+import { toggleDisabledAttribute } from './toggle-disabled-attribute.js';
 
 let mistakeCounter = 0;
 
@@ -35,15 +40,26 @@ export async function checkUserInput(
           'repeat-sequence__button',
           'Repeat Sequence',
         ]);
+        repeatSequenceButton.setAttribute('disabled', '');
         buttonsSet.prepend(repeatSequenceButton);
-        repeatSequenceButton.addEventListener('click', repeatSequence);
+        repeatSequenceButton.addEventListener('click', () => {
+          repeatSequence();
+          toggleDisabledAttribute('.repeat-sequence__button');
+        });
         setTimeout(() => {
           changeRoundCardNumber();
           resolve();
+          animateRoundNumberCard();
         }, 3000);
       });
       buttonsSet.prepend(nextLevelButton);
-      createModal('Round Completed!');
+      if (randomButtonsArr.length >= 6) {
+        createModal('You Win!');
+      } else {
+        createModal('Round Completed!');
+      }
+      removeVirtualKeyboardListeners();
+      document.addEventListener('keydown', itemClickHandler);
     }
   } else {
     if (mistakeCounter >= 1) {
@@ -52,7 +68,6 @@ export async function checkUserInput(
     } else {
       createModal('You are wrong, please try again');
       mistakeCounter += 1;
-      console.log(mistakeCounter);
     }
   }
 }

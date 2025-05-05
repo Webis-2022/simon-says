@@ -20,6 +20,12 @@
   margin: 80px auto;
 }
 
+.repeat-sequence__button:disabled {
+  background-color: #ccc;
+  color: rgb(138, 138, 138);
+  cursor: not-allowed;
+}
+
 .repeat-sequence__button,
 .new-game__button,
 .next-level__button {
