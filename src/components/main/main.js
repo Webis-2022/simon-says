@@ -7,6 +7,7 @@ import { createRoundNumberCard } from '../../components/round-number-card/round-
 import { removeButton } from '../../utils/remove-button.js';
 import { createSequenceInput } from '../sequence-input/sequence-input.js';
 import { runGame } from '../../utils/run-game.js';
+import { toggleDisabledAttribute } from '../../utils/toggle-disabled-attribute.js';
 
 export function createMain() {
   const main = createHtmlElement('main');
@@ -24,12 +25,16 @@ export function createMain() {
   const selectElement = createSelectElement();
   const startButton = createButton(['button', 'start-btn', 'Start']);
   startButton.addEventListener('click', () => {
+    toggleDisabledAttribute('.select');
     createRoundNumberCard();
     createButtonsSet(['button', 'repeat-sequence__button', 'Repeat Sequence'],
       ['button', 'new-game__button', 'New Game']);
     removeButton('.start-btn');
     createSequenceInput();
-    runGame('Easy');
+    const selectInput = document.querySelector('.select');
+    const selectInputNumber =
+      selectInput.options[selectInput.selectedIndex].textContent;
+    runGame(selectInputNumber);
   });
   const keyboardSection = createKeyboard();
   controlsSectionElements.append(selectElement);
