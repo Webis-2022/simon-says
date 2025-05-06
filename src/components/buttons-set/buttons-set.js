@@ -4,6 +4,7 @@ import { repeatSequence } from '../../utils/repeat-sequence.js';
 import { restartGame } from '../../utils/restart-game.js';
 import { changeDifficultyLevel } from '../../utils/change-difficulty-level.js';
 import { toggleDisabledAttribute } from '../../utils/toggle-disabled-attribute.js';
+import { clearTextInput } from '../../utils/clear-text-input.js';
 
 export function createButtonsSet(firstButton, secondButton) {
   const controlSectionElements = document.querySelector(
@@ -14,17 +15,18 @@ export function createButtonsSet(firstButton, secondButton) {
   repeatSequenceBtn.setAttribute('disabled', '');
   setTimeout(() => {
     repeatSequenceBtn.addEventListener('click', () => {
-      console.log('hello');
       repeatSequence();
+      clearTextInput();
       toggleDisabledAttribute('.repeat-sequence__button');
     });
   }, 600);
-  const newGameBtnBtn = createButton(secondButton);
-  newGameBtnBtn.addEventListener('click', () => {
+  const newGameBtn = createButton(secondButton);
+  newGameBtn.setAttribute('disabled', '');
+  newGameBtn.addEventListener('click', () => {
     restartGame();
     changeDifficultyLevel();
   });
 
-  buttonsSet.append(repeatSequenceBtn, newGameBtnBtn);
+  buttonsSet.append(repeatSequenceBtn, newGameBtn);
   controlSectionElements.insertAdjacentElement('beforeend', buttonsSet);
 }

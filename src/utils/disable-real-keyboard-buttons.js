@@ -6,15 +6,13 @@ import {
 
 export function disableRealKeyboardButtons(event, selectInputNumber) {
   let array;
-  console.log('herrrrr', selectInputNumber);
   if (selectInputNumber === '1') {
     array = numbers;
   } else {
     array = alphabetUpper;
   }
   disableDeleteButtons();
-  console.log('...', !array.includes(event.key));
-  return !array.includes(event.key);
+  return !array.includes(event.key || event.target.textContent);
 }
 
 export function disableDeleteButtons() {
