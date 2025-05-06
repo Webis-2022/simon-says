@@ -27,13 +27,7 @@ export async function changeButtonColor(event, resolve) {
       clickedButtonIndex = index;
     }
   });
-  console.log('---', clickedButtonIndex);
   await new Promise((resolve) => {
-    // target.style.backgroundColor = '#f8ce9f';
-    // setTimeout(() => {
-    //   target.style.backgroundColor = '#f0f0f0';
-    //   resolve();
-    // }, 900);
     highlightButton(clickedButtonIndex);
     resolve();
   });
