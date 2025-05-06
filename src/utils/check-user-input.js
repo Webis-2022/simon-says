@@ -19,8 +19,6 @@ export async function checkUserInput(
   clickedButtonsArr,
   resolve
 ) {
-  console.log('1', randomButtonsArr);
-  console.log('2', clickedButtonsArr);
   const index = clickedButtonsArr.length - 1;
   const isCorrect = randomButtonsArr[index] === clickedButtonsArr[index];
 

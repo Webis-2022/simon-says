@@ -1,6 +1,5 @@
 export async function highlightButton(index) {
   const items = document.querySelectorAll('.item');
-  console.log('index', index);
   items[index].style.backgroundColor = '#f8ce9f';
 
   await new Promise((resolve) => setTimeout(resolve, 1000));

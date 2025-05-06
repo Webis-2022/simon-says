@@ -4,7 +4,6 @@ import { createMain } from '../components/main/main.js';
 export function restartGame() {
   const selectInput = document.querySelector('.select');
   const selectInputNumber = selectInput.value;
-  console.log(selectInputNumber);
   document.body.innerHTML = '';
   createHeader();
   createMain();
