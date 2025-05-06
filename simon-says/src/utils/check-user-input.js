@@ -3,13 +3,14 @@ import { createModal } from '../components/modal-window/modal-window.js';
 import { removeButton } from './remove-button.js';
 import { animateRoundNumberCard } from './animate-round-number-card.js';
 import { changeRoundCardNumber } from '../utils/change-round-card-number.js';
-import { clickVirtualKeyboardButton } from './click-virtual-keyboard-button.js';
+import { clickVirtualKeyboardButton } from './click-keyboard-button.js';
 import { repeatSequence } from './repeat-sequence.js';
 import {
   removeVirtualKeyboardListeners,
   itemClickHandler,
-} from './click-virtual-keyboard-button.js';
+} from './click-keyboard-button.js';
 import { toggleDisabledAttribute } from './toggle-disabled-attribute.js';
+import { createButtonsSet } from '../components/buttons-set/buttons-set.js';
 
 let mistakeCounter = 0;
 
@@ -34,18 +35,12 @@ export async function checkUserInput(
       ]);
       nextLevelButton.addEventListener('click', async () => {
         animateRoundNumberCard();
-        removeButton('.next-level__button');
-        const repeatSequenceButton = createButton([
-          'button',
-          'repeat-sequence__button',
-          'Repeat Sequence',
-        ]);
-        repeatSequenceButton.setAttribute('disabled', '');
-        buttonsSet.prepend(repeatSequenceButton);
-        repeatSequenceButton.addEventListener('click', () => {
-          repeatSequence();
-          toggleDisabledAttribute('.repeat-sequence__button');
-        });
+        const buttonsSet = document.querySelector('.buttons-set');
+        buttonsSet.remove();
+        createButtonsSet(
+          ['button', 'repeat-sequence__button', 'Repeat Sequence'],
+          ['button', 'new-game__button', 'New Game']
+        );
         setTimeout(() => {
           changeRoundCardNumber();
           resolve();

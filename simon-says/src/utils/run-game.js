@@ -3,12 +3,12 @@ import {
   numbers,
 } from '../components/keyboard-section/keyboard-button.js';
 import { highlightButton } from './highlight-button.js';
-import { clickedButtonsArr } from './click-virtual-keyboard-button.js';
+import { clickedButtonsArr } from './click-keyboard-button.js';
 import { checkUserInput } from './check-user-input.js';
 import {
   clickVirtualKeyboardButton,
   clickRealKeyboardButton,
-} from './click-virtual-keyboard-button.js';
+} from './click-keyboard-button.js';
 import { toggleDisabledAttribute } from './toggle-disabled-attribute.js';
 
 export let savedRandomButtonsArr = [];
@@ -41,6 +41,7 @@ export async function runGame(difficultyLevel) {
       savedIndexArr = indexArr;
       await highlightButton(index);
     }
+    toggleDisabledAttribute('.new-game__button');
     toggleDisabledAttribute('.repeat-sequence__button');
     await new Promise((resolve) => {
       clickedButtonsArr.length = 0;
