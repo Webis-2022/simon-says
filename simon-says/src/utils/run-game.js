@@ -4,7 +4,6 @@ import {
 } from '../components/keyboard-section/keyboard-button.js';
 import { highlightButton } from './highlight-button.js';
 import { clickedButtonsArr } from './click-keyboard-button.js';
-import { checkUserInput } from './check-user-input.js';
 import {
   clickVirtualKeyboardButton,
   clickRealKeyboardButton,
@@ -46,7 +45,7 @@ export async function runGame(difficultyLevel) {
     await new Promise((resolve) => {
       clickedButtonsArr.length = 0;
       clickVirtualKeyboardButton(resolve);
-      clickRealKeyboardButton();
+      clickRealKeyboardButton(resolve);
     });
     i += 2;
   }
