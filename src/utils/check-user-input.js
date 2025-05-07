@@ -3,26 +3,31 @@ import { createModal } from '../components/modal-window/modal-window.js';
 import { removeButton } from './remove-button.js';
 import { animateRoundNumberCard } from './animate-round-number-card.js';
 import { changeRoundCardNumber } from '../utils/change-round-card-number.js';
-import { clickVirtualKeyboardButton } from './click-keyboard-button.js';
-import { repeatSequence } from './repeat-sequence.js';
 import {
   removeVirtualKeyboardListeners,
-  itemClickHandler,
+  removeRealKeyboardListeners,
 } from './click-keyboard-button.js';
 import { toggleDisabledAttribute } from './toggle-disabled-attribute.js';
 import { createButtonsSet } from '../components/buttons-set/buttons-set.js';
+import { clearTextInput } from './clear-text-input.js';
+import { insertCharToInput } from './insert-char-to-input.js';
+import { removeLastElementFromArray } from './remove-last-element-from-array.js';
 
 let mistakeCounter = 0;
 
 export async function checkUserInput(
   randomButtonsArr,
   clickedButtonsArr,
-  resolve
+  resolve,
+  event
 ) {
   const index = clickedButtonsArr.length - 1;
   const isCorrect = randomButtonsArr[index] === clickedButtonsArr[index];
-
+  console.log('1', randomButtonsArr);
+  console.log('2', clickedButtonsArr);
+  console.log('3', clickedButtonsArr[index]);
   if (isCorrect) {
+    insertCharToInput(event.target.textContent);
     if (randomButtonsArr.length === clickedButtonsArr.length) {
       removeButton('.repeat-sequence__button');
       const buttonsSet = document.querySelector('.buttons-set');
@@ -32,6 +37,7 @@ export async function checkUserInput(
         'Next Level',
       ]);
       nextLevelButton.addEventListener('click', async () => {
+        clearTextInput();
         animateRoundNumberCard();
         const buttonsSet = document.querySelector('.buttons-set');
         buttonsSet.remove();
@@ -46,19 +52,23 @@ export async function checkUserInput(
         }, 3000);
       });
       buttonsSet.prepend(nextLevelButton);
-      if (randomButtonsArr.length >= 6) {
+      if (randomButtonsArr.length >= 10) {
         createModal('You Win!');
       } else {
         createModal('Round Completed!');
       }
       removeVirtualKeyboardListeners();
-      document.addEventListener('keydown', itemClickHandler);
+      removeRealKeyboardListeners();
     }
   } else {
     if (mistakeCounter >= 1) {
+      event.preventDefault();
+      toggleDisabledAttribute('.repeat-sequence__button');
       createModal('Game Over');
       return;
     } else {
+      event.preventDefault();
+      removeLastElementFromArray();
       createModal('You are wrong, please try again');
       mistakeCounter += 1;
     }

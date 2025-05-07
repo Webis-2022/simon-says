@@ -1,8 +1,7 @@
 import { checkUserInput } from './check-user-input.js';
-import { savedRandomButtonsArr, savedIndexArr } from './run-game.js';
+import { savedRandomButtonsArr } from './run-game.js';
 import { highlightButton } from './highlight-button.js';
 import { disableRealKeyboardButtons } from './disable-real-keyboard-buttons.js';
-import { insertCharToInput } from './insert-char-to-input.js';
 export let clickedButtonsArr = [];
 
 export async function changeButtonColor(event, resolve) {
@@ -13,7 +12,6 @@ export async function changeButtonColor(event, resolve) {
   } else {
     if (target.classList.contains('item')) {
       clickedButtonsArr.push(target.textContent);
-      insertCharToInput(target.textContent);
     } else {
       clickedButtonsArr.push(event.key);
     }
@@ -31,7 +29,12 @@ export async function changeButtonColor(event, resolve) {
     highlightButton(clickedButtonIndex);
     resolve();
   });
-  await checkUserInput(savedRandomButtonsArr, clickedButtonsArr, resolve);
+  await checkUserInput(
+    savedRandomButtonsArr,
+    clickedButtonsArr,
+    resolve,
+    event
+  );
 }
 
 export async function itemClickHandler(event) {
@@ -48,8 +51,13 @@ export async function clickVirtualKeyboardButton(resolve) {
   });
 }
 
-export function clickRealKeyboardButton() {
+export async function clickRealKeyboardButton(resolve) {
+  resolveGlobal = resolve;
   document.addEventListener('keydown', itemClickHandler);
+}
+
+export function removeRealKeyboardListeners() {
+  document.removeEventListener('keydown', itemClickHandler);
 }
 
 export function removeVirtualKeyboardListeners() {

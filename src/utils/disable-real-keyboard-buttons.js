@@ -3,7 +3,6 @@ import {
   numbers,
 } from '../components/keyboard-section/keyboard-button.js';
 
-
 export function disableRealKeyboardButtons(event, selectInputNumber) {
   let array;
   if (selectInputNumber === '1') {
