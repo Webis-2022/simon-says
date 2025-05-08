@@ -42,8 +42,13 @@
 }
 
 @media (max-width: 500px) {
+  .game-title {
+    font-size: 3.8em;
+  }
+
   .grid-container {
-    gap: 8px;
+    gap: 5px;
+    width: 95%;
   }
 
   .item {

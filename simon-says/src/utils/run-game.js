@@ -11,7 +11,7 @@ import {
 import { toggleDisabledAttribute } from './toggle-disabled-attribute.js';
 
 export let savedRandomButtonsArr = [];
-export let savedIndexArr;
+export let savedIndexArr = [];
 
 export async function runGame(difficultyLevel) {
   let array = [];
