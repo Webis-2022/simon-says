@@ -8,6 +8,7 @@ import { removeButton } from '../../utils/remove-button.js';
 import { createSequenceInput } from '../sequence-input/sequence-input.js';
 import { runGame } from '../../utils/run-game.js';
 import { toggleDisabledAttribute } from '../../utils/toggle-disabled-attribute.js';
+import { scrollToElement } from '../../utils/scroll-to-element.js';
 
 export function createMain() {
   const main = createHtmlElement('main');
@@ -16,7 +17,10 @@ export function createMain() {
     'div',
     'controls-section__container'
   );
-  const controlsSectionContent = createHtmlElement('div', 'controls-section__content');
+  const controlsSectionContent = createHtmlElement(
+    'div',
+    'controls-section__content'
+  );
   const controlsSectionElements = createHtmlElement(
     'div',
     'control-section__elements'
@@ -24,13 +28,17 @@ export function createMain() {
 
   const selectElement = createSelectElement();
   const startButton = createButton(['button', 'start-btn', 'Start']);
-  startButton.addEventListener('click', () => {
+  startButton.addEventListener('click', async () => {
     toggleDisabledAttribute('.select');
     createRoundNumberCard();
-    createButtonsSet(['button', 'repeat-sequence__button', 'Repeat Sequence'],
-      ['button', 'new-game__button', 'New Game']);
+    createButtonsSet(
+      ['button', 'repeat-sequence__button', 'Repeat Sequence'],
+      ['button', 'new-game__button', 'New Game']
+    );
     removeButton('.start-btn');
     createSequenceInput();
+    scrollToElement('.keyboard-section__content');
+    await new Promise((resolve) => setTimeout(resolve, 1500));
     const selectInput = document.querySelector('.select');
     const selectInputNumber =
       selectInput.options[selectInput.selectedIndex].textContent;
