@@ -11,7 +11,7 @@ export function disableRealKeyboardButtons(event, selectInputNumber) {
     array = alphabetUpper;
   }
   disableDeleteButtons();
-  return !array.includes(event.key || event.target.textContent);
+  return !array.includes(event.key.toUpperCase() || event.target.textContent);
 }
 
 export function disableDeleteButtons() {

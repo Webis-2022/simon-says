@@ -13,14 +13,15 @@ export async function changeButtonColor(event, resolve) {
   } else {
     if (target.classList.contains('item')) {
       clickedButtonsArr.push(target.textContent);
-      // insertCharToInput(target.textContent);
+      insertCharToInput(target.textContent);
     } else {
-      clickedButtonsArr.push(event.key);
+      clickedButtonsArr.push(event.key.toUpperCase());
     }
   }
 
   let clickedButtonIndex;
-  let clickedButton = event.key === undefined ? target.textContent : event.key;
+  let clickedButton =
+    event.key === undefined ? target.textContent : event.key.toUpperCase();
   const allButtons = document.querySelectorAll('.item');
   [...allButtons].forEach((button, index) => {
     if (button.textContent.includes(clickedButton)) {
@@ -31,7 +32,12 @@ export async function changeButtonColor(event, resolve) {
     highlightButton(clickedButtonIndex);
     resolve();
   });
-  await checkUserInput(savedRandomButtonsArr, clickedButtonsArr, resolve, event);
+  await checkUserInput(
+    savedRandomButtonsArr,
+    clickedButtonsArr,
+    resolve,
+    event
+  );
 }
 
 export async function itemClickHandler(event) {

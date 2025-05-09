@@ -12,6 +12,7 @@ import { createButtonsSet } from '../components/buttons-set/buttons-set.js';
 import { clearTextInput } from './clear-text-input.js';
 import { insertCharToInput } from './insert-char-to-input.js';
 import { removeLastElementFromArray } from './remove-last-element-from-array.js';
+import { scrollToElement } from './scroll-to-element.js';
 
 let mistakeCounter = 0;
 
@@ -23,9 +24,6 @@ export async function checkUserInput(
 ) {
   const index = clickedButtonsArr.length - 1;
   const isCorrect = randomButtonsArr[index] === clickedButtonsArr[index];
-  console.log('1', randomButtonsArr);
-  console.log('2', clickedButtonsArr);
-  console.log('3', clickedButtonsArr[index]);
   if (isCorrect) {
     insertCharToInput(event.target.textContent);
     if (randomButtonsArr.length === clickedButtonsArr.length) {
@@ -37,6 +35,7 @@ export async function checkUserInput(
         'Next Level',
       ]);
       nextLevelButton.addEventListener('click', async () => {
+        scrollToElement('.keyboard-section__content');
         clearTextInput();
         animateRoundNumberCard();
         const buttonsSet = document.querySelector('.buttons-set');
@@ -54,6 +53,7 @@ export async function checkUserInput(
       buttonsSet.prepend(nextLevelButton);
       if (randomButtonsArr.length >= 10) {
         createModal('You Win!');
+        toggleDisabledAttribute('.next-level__button');
       } else {
         createModal('Round Completed!');
       }
