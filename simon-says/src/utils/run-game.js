@@ -27,8 +27,8 @@ export async function runGame(difficultyLevel) {
     arrayLength = 36;
   }
   let i = 2;
-  while (i <= 6) {
-    if (i > 6) break;
+  while (i <= 10) {
+    if (i > 10) break;
     let randomButtonsArr = [];
     let indexArr = [];
     for (let j = 1; j <= i; j += 1) {

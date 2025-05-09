@@ -21,7 +21,8 @@
 }
 
 .repeat-sequence__button:disabled,
-.new-game__button:disabled {
+.new-game__button:disabled,
+.next-level__button:disabled {
   background-color: #ccc;
   color: rgb(138, 138, 138);
   cursor: not-allowed;
