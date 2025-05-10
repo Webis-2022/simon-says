@@ -1,0 +1,23 @@
+.playground-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.playground {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  aspect-ratio: 1 / 1;
+  width: 60%;
+  max-width: 400px;
+}
+
+.cell {
+  border: 1px solid #000;
+  aspect-ratio: 1 / 1;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
