@@ -3,17 +3,64 @@
   justify-content: center;
 }
 
-.playground {
+/* .playground {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  aspect-ratio: 1 / 1;
+  grid-template-columns: repeat(5, 50px);
+  grid-template-rows: repeat(5, 50px);
   width: 60%;
   max-width: 400px;
 }
 
+
+
+
 .cell {
   border: 1px solid #000;
   aspect-ratio: 1 / 1;
+}
+
+.header-col {
+  width: 80px;
+}
+
+.header-row {
+  height: 80px;
+} */
+
+
+.playground {
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  grid-template-rows: repeat(6, auto);
+}
+
+.cell {
+  border: 1px solid #000;
+  width: 50px;
+  height: 50px;
+  aspect-ratio: 1 / 1;
+}
+
+.cell.header-col {
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.cell.header-row {
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.cell.header-empty {
+  width: 70px;
+  height: 70px;
 }
 
 .canvas {
