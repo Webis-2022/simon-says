@@ -23,6 +23,7 @@ module.exports = {
   devServer: {
     static: './dist',
     port: 3000,
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

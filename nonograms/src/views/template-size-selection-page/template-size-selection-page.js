@@ -3,10 +3,17 @@ import { createHtmlElement } from '../../components/html-element/html-element';
 import { createButton } from '../../components/button/button';
 import templateImage from '../../assets/img/template.png';
 import './template-size-selection-page.css';
+import { createTemplateSelectionPage } from '../template-selection-page/template-selection-page';
+import { navigateTo } from '../../main';
+import { makeBackgroundBlack } from '../../utils/make-background-color-black';
+
+// eslint-disable-next-line import/no-mutable-exports
+export let fieldSize;
 
 export function createTemplateSizeSelectionPage() {
-  let nextSize = 0;
+  const smallestSize = 5;
   clearPage();
+  makeBackgroundBlack();
 
   const fieldSizeWrapper = createHtmlElement('div', ['field-size__wrapper']);
   const title = createHtmlElement('h1', ['title'], 'Please select size of template');
@@ -17,21 +24,31 @@ export function createTemplateSizeSelectionPage() {
   fieldSizeWrapper.append(title);
 
   for (let i = 0; i < 3; i += 1) {
-    const smallestSize = 5;
     const fieldSizeSelector = createHtmlElement('div', ['field-size__selector']);
+
 
     const selectorImage = createHtmlElement('img');
     selectorImage.src = templateImage;
-    const fieldSize = createHtmlElement(
+    const fieldSizeValue = createHtmlElement(
       'span',
       [],
-      `${smallestSize + nextSize}x${smallestSize + nextSize}`
+      `${smallestSize * (i + 1)}x${smallestSize * (i + 1)}`
     );
-    nextSize += 5;
 
-    fieldSizeSelector.append(selectorImage, fieldSize);
+    fieldSizeSelector.append(selectorImage, fieldSizeValue);
     fieldSizeWrapper.append(fieldSizeSelector);
   }
+  setTimeout(() => {
+    const fieldSizeSelectors = document.querySelectorAll('.field-size__selector');
+
+    fieldSizeSelectors.forEach((selector, index) =>
+      selector.addEventListener('click', () => {
+        fieldSize = String(`${smallestSize * (index + 1)}x${smallestSize * (index + 1)}`);
+        console.log('---', fieldSize);
+        navigateTo('/template-selection', fieldSize);
+      })
+    );
+  }, 400);
   fieldSizeWrapper.append(selectRandomTemplate);
   document.body.append(fieldSizeWrapper);
 }

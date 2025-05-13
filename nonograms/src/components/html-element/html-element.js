@@ -14,7 +14,6 @@
 export function createHtmlElement(tag, classNames = [], text = '') {
   const element = document.createElement(tag);
   classNames.forEach(cls => {
-    console.log('---', cls);
     if (cls) element.classList.add(cls);
   });
   if (typeof text === 'string' && text.length > 0) {

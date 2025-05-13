@@ -1,0 +1,110 @@
+import { clearPage } from '../../utils/clear-page';
+import { createHtmlElement } from '../../components/html-element/html-element';
+import leftArrow from '../../assets/img/left-arrow.png';
+import { createTemplateSizeSelectionPage } from '../template-size-selection-page/template-size-selection-page';
+import './template-selection-page.css';
+import { navigateTo } from '../../main';
+import { makeBackgroundBlack } from '../../utils/make-background-color-black';
+import { returnButtonHandler } from '../../button-handlers/button-handlers';
+
+const smallFields = ['snake', 'car', 'airplane', 'dog', 'snowflake'];
+const middleFields = ['home', 'tv', 'football', 'tree', 'mouse'];
+const bigFields = ['spades', 'sun', 'church', 'lamp', 'swan'];
+
+export function createTemplateSelectionPage(playGroundSize) {
+  let templatesArr = [];
+  if (playGroundSize === '5x5') {
+    templatesArr = smallFields;
+  } else if (playGroundSize === '10x10') {
+    templatesArr = middleFields;
+  } else if (playGroundSize === '15x15') {
+    templatesArr = bigFields;
+  }
+
+  clearPage();
+  makeBackgroundBlack();
+  const templatesWrapper = createHtmlElement('div', ['templates-wrapper']);
+
+  const returnButton = createHtmlElement('div', ['return-button']);
+
+  const returnButtonIcon = createHtmlElement('img');
+  returnButtonIcon.src = leftArrow;
+
+  const title = createHtmlElement('h1', ['title'], 'Please select a template');
+
+  returnButton.append(returnButtonIcon);
+  returnButton.addEventListener('click', returnButtonHandler);
+  templatesWrapper.append(returnButton, title);
+
+  for (let j = 0; j < 5; j += 1) {
+    const templateSelector = createHtmlElement('div', ['template-selector']);
+    templateSelector.setAttribute('data-number', j);
+
+    templateSelector.addEventListener('click', (event) => {
+      const buttonNumber = event.currentTarget.dataset.number;
+      console.log('B', buttonNumber);
+      navigateTo('/game', buttonNumber);
+    })
+
+    const templateName = document.createElement('span');
+    templateName.textContent = templatesArr[j].charAt(0).toUpperCase() + templatesArr[j].slice(1);
+
+    templateSelector.appendChild(templateName);
+    templatesWrapper.appendChild(templateSelector);
+  }
+  document.body.appendChild(templatesWrapper);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// returnButton.addEventListener('click', () => {
+//   clearPage();
+//   createTemplateSizeSelectionPage();
+
+//   const fieldSizeSelectors = document.querySelectorAll('.field-size__selector');
+//   fieldSizeSelectors.forEach((button) => {
+//     button.replaceWith(button.cloneNode(true));
+//   })
+
+//   const newFieldSizeSelectors = document.querySelectorAll('.field-size__selector');
+//   newFieldSizeSelectors.forEach((button) => {
+//     button.addEventListener('click', (event) => {
+//       const playGroundSize = event.target.textContent;
+//       showTemplates(playGroundSize);
+
+//     // Repeat Event listener
+
+//       const templateButtons = document.querySelectorAll('.template-selector');
+//       templateButtons.forEach((button) => button.addEventListener('click', (event) => {
+//         getTemplateData(event,playGroundSize);
+//         removeAdditionalField();
+//       }))
+//     });
+//   })
+// })
+
+// for(let j = 0; j < 5; j++) {
+//   const templateSelector = document.createElement('div');
+//   templateSelector.classList.add('template-selector');
+//   templateSelector.setAttribute('data-number', j);
+
+//   const templateName = document.createElement('span');
+//   templateName.textContent = templatesArr[j].charAt(0).toUpperCase() + templatesArr[j].slice(1);;
+
+//   templateSelector.appendChild(templateName);
+//   templatesWrapper.appendChild(templateSelector);
+// }
+// body.appendChild(templatesWrapper)

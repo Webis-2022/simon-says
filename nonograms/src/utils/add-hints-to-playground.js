@@ -1,13 +1,13 @@
 import { nonograms } from '../assets/nonograms';
 
-export function addHintsToPlayground() {
+export function addHintsToPlayground(buttonNumber, fieldSize) {
+  console.log(buttonNumber);
   const allColumns = document.querySelectorAll('.header-col');
   const allRows = document.querySelectorAll('.header-row');
   // eslint-disable-next-line prefer-destructuring
-  const columnHints = nonograms['5x5'][0].columnHints;
+  const columnHints = nonograms[fieldSize][Number(buttonNumber)].columnHints;
   // eslint-disable-next-line prefer-destructuring
-  const rowHints = nonograms['5x5'][0].rowHints;
-  console.log('===', rowHints);
+  const rowHints = nonograms[fieldSize][Number(buttonNumber)].rowHints;
   for (let i = 0; i < columnHints.length; i += 1) {
     for (let j = 0; j < columnHints[i].length; j += 1) {
       allColumns[i].innerHTML += `<span>${columnHints[i][j]}</span>`;

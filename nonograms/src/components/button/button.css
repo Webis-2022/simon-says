@@ -1,0 +1,60 @@
+.play-button,
+.reset-button,
+.save-button,
+.load-button,
+.select-template__button,
+.select-random-template__button,
+.menu-button,
+.show-solution-button {
+  font-size: 1.6em;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 50px;
+  border: 3px solid #fff;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0.5em;
+
+  &:hover {
+    border-color: rgb(255, 202, 122);
+  }
+}
+
+.menu-button {
+  font-size: 1.2em;
+}
+
+.play-button {
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.reset-button,
+.save-button,
+.load-button,
+.show-solution-button,
+.menu-button {
+  border: 3px solid #000;
+  color: #000;
+}
+
+.select-template__button,
+.select-random-template__button {
+  border: 3px solid #fff;
+  color: #fff;
+  font-size: 1.2em;
+  margin-left: 5%;
+  padding: 2%;
+}
+
+.select-random-template__button {
+  width: 40%;
+}
+
+.select-template__button {
+  width: 20%;
+}
+
+.select-random-template__button {
+  margin-right: 0;
+}

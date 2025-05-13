@@ -1,37 +1,14 @@
 .playground-wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-
-/* .playground {
-  display: grid;
-  grid-template-columns: repeat(5, 50px);
-  grid-template-rows: repeat(5, 50px);
-  width: 60%;
-  max-width: 400px;
-}
-
-
-
-
-.cell {
-  border: 1px solid #000;
-  aspect-ratio: 1 / 1;
-}
-
-.header-col {
-  width: 80px;
-}
-
-.header-row {
-  height: 80px;
-} */
-
 
 .playground {
   display: grid;
-  grid-template-columns: repeat(6, auto);
-  grid-template-rows: repeat(6, auto);
+  /* grid-template-columns: repeat(6, auto);
+  grid-template-rows: repeat(6, auto); */
 }
 
 .cell {

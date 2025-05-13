@@ -4,11 +4,11 @@ import { clearCell } from '../../utils/clear-cell';
 import { paintCross } from '../../utils/paint-cross';
 import './playground.css';
 
-const playground = createHtmlElement('div', 'playground');
+const playground = createHtmlElement('div', ['playground']);
 
 function createCell(cellClassNames) {
   const cell = createHtmlElement('div', cellClassNames);
-  const canvas = createHtmlElement('canvas', 'canvas');
+  const canvas = createHtmlElement('canvas', ['canvas']);
   if (
     !cell.classList.contains('header-row') &&
     !cell.classList.contains('header-col') &&
@@ -41,20 +41,40 @@ function createCell(cellClassNames) {
   return playground;
 }
 
-export function createPlayground() {
-  const playgroundWrapper = createHtmlElement('div', 'playground-wrapper');
+export function createPlayground(fieldSize) {
+  const playgroundWrapper = createHtmlElement('div', ['playground-wrapper']);
+  playground.innerHTML = '';
   let playgroundElement;
-  for (let i = 0; i <= 35; i += 1) {
+  let cellsCount;
+  let headerColCount;
+  let headerRowCount;
+
+  if (fieldSize === '5x5') {
+    cellsCount = 35;
+    headerColCount = 6;
+    headerRowCount = 6;
+  } else if (fieldSize === '10x10') {
+    cellsCount = 120;
+    headerColCount = 11;
+    headerRowCount = 11;
+  } else {
+    cellsCount = 255;
+    headerColCount = 16;
+    headerRowCount = 16;
+  }
+  for (let i = 0; i <= cellsCount; i += 1) {
     if (i === 0) {
-      playgroundElement = createCell('cell', 'header-empty');
-    } else if (i > 0 && i < 6) {
-      playgroundElement = createCell('cell', 'header-col');
-    } else if (i % 6 === 0) {
-      playgroundElement = createCell('cell', 'header-row');
+      playgroundElement = createCell(['cell', 'header-empty']);
+    } else if (i > 0 && i < headerColCount) {
+      playgroundElement = createCell(['cell', 'header-col']);
+    } else if (i % headerRowCount === 0) {
+      playgroundElement = createCell(['cell', 'header-row']);
     } else {
-      playgroundElement = createCell('cell');
+      playgroundElement = createCell(['cell']);
     }
   }
+  playground.style.gridTemplateColumns = `repeat(${headerColCount}, auto)`;
+  playground.style.gridTemplateRows = `repeat(${headerRowCount}, auto)`;
   playgroundWrapper.append(playgroundElement);
   document.body.append(playgroundWrapper);
 }
