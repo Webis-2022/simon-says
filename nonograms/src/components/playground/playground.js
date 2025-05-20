@@ -26,11 +26,17 @@ function createCell(cellClassNames) {
   }
   cell.addEventListener('contextmenu', (event) => {
     event.preventDefault();
-    const { target } = event;
-    if (target.classList.contains('cross')) {
-      clearCell(target);
-    } else {
-      paintCross(target);
+    if (
+      !cell.classList.contains('header-row') &&
+      !cell.classList.contains('header-col') &&
+      !cell.classList.contains('header-empty')
+    ) {
+      const { target } = event;
+      if (target.classList.contains('cross')) {
+        clearCell(target);
+      } else {
+        paintCross(target);
+      }
     }
   });
   setTimeout(() => {
@@ -42,12 +48,18 @@ function createCell(cellClassNames) {
 }
 
 export function createPlayground(fieldSize) {
+  if (fieldSize === undefined) {
+    // eslint-disable-next-line no-param-reassign
+    fieldSize = localStorage.getItem('fieldSize');
+  }
+  console.log('F2', fieldSize);
   const playgroundWrapper = createHtmlElement('div', ['playground-wrapper']);
   playground.innerHTML = '';
   let playgroundElement;
   let cellsCount;
   let headerColCount;
   let headerRowCount;
+  const cellSize = 'minmax(auto, 25%)';
 
   if (fieldSize === '5x5') {
     cellsCount = 35;
@@ -70,11 +82,23 @@ export function createPlayground(fieldSize) {
     } else if (i % headerRowCount === 0) {
       playgroundElement = createCell(['cell', 'header-row']);
     } else {
-      playgroundElement = createCell(['cell']);
+      playgroundElement = createCell(['cell', 'play']);
     }
   }
-  playground.style.gridTemplateColumns = `repeat(${headerColCount}, auto)`;
-  playground.style.gridTemplateRows = `repeat(${headerRowCount}, auto)`;
+  setTimeout(() => {
+    const cells = document.querySelectorAll('.play');
+    console.log('length', cells.length);
+    for (let j = 4; j <= cells.length - 1; j += 5) {
+      cells[j].style.borderRight = '3px solid #000';
+    }
+    for (let k = 60; k <= cells.length - 1; k += 75) {
+      for (let l = k; l < k + 15; l += 1) {
+        cells[l].style.borderBottom = '3px solid #000';
+      }
+    }
+  }, 100);
+  playground.style.gridTemplateColumns = `repeat(${headerColCount}, ${cellSize})`;
+  playground.style.gridTemplateRows = `repeat(${headerRowCount}, ${cellSize})`;
   playgroundWrapper.append(playgroundElement);
   document.body.append(playgroundWrapper);
 }

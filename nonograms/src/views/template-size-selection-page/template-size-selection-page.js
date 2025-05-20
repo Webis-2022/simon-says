@@ -6,6 +6,7 @@ import './template-size-selection-page.css';
 import { createTemplateSelectionPage } from '../template-selection-page/template-selection-page';
 import { navigateTo } from '../../main';
 import { makeBackgroundBlack } from '../../utils/make-background-color-black';
+import { selectRandomTemplateButtonHandler } from '../../button-handlers/button-handlers';
 
 // eslint-disable-next-line import/no-mutable-exports
 export let fieldSize;
@@ -21,6 +22,7 @@ export function createTemplateSizeSelectionPage() {
     ['select-random-template__button'],
     'Select Random Template'
   );
+  selectRandomTemplate.addEventListener('click', selectRandomTemplateButtonHandler);
   fieldSizeWrapper.append(title);
 
   for (let i = 0; i < 3; i += 1) {

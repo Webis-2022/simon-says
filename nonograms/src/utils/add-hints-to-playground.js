@@ -1,13 +1,26 @@
 import { nonograms } from '../assets/nonograms';
 
 export function addHintsToPlayground(buttonNumber, fieldSize) {
+  if (buttonNumber === undefined || fieldSize === undefined) {
+    // eslint-disable-next-line no-param-reassign
+    buttonNumber = localStorage.getItem('buttonNumber');
+    // eslint-disable-next-line no-param-reassign
+    fieldSize = localStorage.getItem('fieldSize');
+  }
   console.log(buttonNumber);
+  localStorage.setItem('buttonNumber', buttonNumber);
+  localStorage.setItem('fieldSize', fieldSize);
   const allColumns = document.querySelectorAll('.header-col');
+  console.log('A', allColumns);
   const allRows = document.querySelectorAll('.header-row');
+  console.log('B', buttonNumber);
+  console.log('F', fieldSize);
   // eslint-disable-next-line prefer-destructuring
   const columnHints = nonograms[fieldSize][Number(buttonNumber)].columnHints;
+  console.log('C', columnHints);
   // eslint-disable-next-line prefer-destructuring
   const rowHints = nonograms[fieldSize][Number(buttonNumber)].rowHints;
+  console.log('R', rowHints);
   for (let i = 0; i < columnHints.length; i += 1) {
     for (let j = 0; j < columnHints[i].length; j += 1) {
       allColumns[i].innerHTML += `<span>${columnHints[i][j]}</span>`;

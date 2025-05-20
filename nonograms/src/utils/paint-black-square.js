@@ -7,7 +7,7 @@ export function paintBlackSquare(target) {
     clearCell(target);
   }
   const ctx = getContextCanvas(target);
-  ctx.fillRect(10, 10, 30, 30);
+  ctx.fillRect(5, 5, 20, 20);
   target.classList.toggle('square', true);
   addUserAnswersToArray();
 }

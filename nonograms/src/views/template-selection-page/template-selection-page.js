@@ -7,9 +7,9 @@ import { navigateTo } from '../../main';
 import { makeBackgroundBlack } from '../../utils/make-background-color-black';
 import { returnButtonHandler } from '../../button-handlers/button-handlers';
 
-const smallFields = ['snake', 'car', 'airplane', 'dog', 'snowflake'];
-const middleFields = ['home', 'tv', 'football', 'tree', 'mouse'];
-const bigFields = ['spades', 'sun', 'church', 'lamp', 'swan'];
+export const smallFields = ['snake', 'car', 'airplane', 'dog', 'snowflake'];
+export const middleFields = ['home', 'tv', 'football', 'tree', 'mouse'];
+export const bigFields = ['spades', 'sun', 'church', 'lamp', 'swan'];
 
 export function createTemplateSelectionPage(playGroundSize) {
   let templatesArr = [];
@@ -42,8 +42,7 @@ export function createTemplateSelectionPage(playGroundSize) {
 
     templateSelector.addEventListener('click', (event) => {
       const buttonNumber = event.currentTarget.dataset.number;
-      console.log('B', buttonNumber);
-      navigateTo('/game', buttonNumber);
+      navigateTo('/game', playGroundSize, buttonNumber);
     })
 
     const templateName = document.createElement('span');
