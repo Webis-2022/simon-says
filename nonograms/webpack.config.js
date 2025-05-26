@@ -18,6 +18,13 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg|webp)$/i,
         type: 'asset/resource',
       },
+      {
+        test: /\.(mp3|wav)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/audio/[name][ext]',
+        },
+      },
     ],
   },
   devServer: {

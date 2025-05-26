@@ -20,6 +20,7 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
+  border-top: 3px solid;
 }
 
 .cell.header-row {
@@ -27,7 +28,9 @@
   align-items: center;
   justify-content: center;
   gap: 7px;
+  border-left: 3px solid #000;
   border-right: 3px solid #000;
+  border-bottom: 3px solid #000;
 }
 
 /* .header-row {
@@ -35,8 +38,7 @@
 } */
 
 .cell.header-empty {
-  border-right: 3px solid #000;
-  border-bottom: 3px solid #000;
+  border: 3px solid #000;
 }
 
 .header-col {

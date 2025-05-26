@@ -42,6 +42,8 @@ export function createTemplateSelectionPage(playGroundSize) {
 
     templateSelector.addEventListener('click', (event) => {
       const buttonNumber = event.currentTarget.dataset.number;
+      localStorage.setItem('buttonNumber', buttonNumber);
+      localStorage.setItem('fieldSize', playGroundSize);
       navigateTo('/game', playGroundSize, buttonNumber);
     })
 

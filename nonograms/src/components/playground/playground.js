@@ -3,6 +3,18 @@ import { paintBlackSquare } from '../../utils/paint-black-square';
 import { clearCell } from '../../utils/clear-cell';
 import { paintCross } from '../../utils/paint-cross';
 import './playground.css';
+import { playSoundForBlackSquare } from '../../utils/play-sound';
+import { makeInnerBorderWider, makeOuterBorderWider } from '../../utils/make-border-wider';
+
+// localStorage.removeItem('isSoundEnabled')
+
+let isSoundEnabled;
+if (localStorage.getItem('isSoundEnabled') === null) {
+  isSoundEnabled = true;
+  localStorage.setItem('isSoundEnabled', isSoundEnabled);
+} else {
+  isSoundEnabled = localStorage.getItem('isSoundEnabled');
+}
 
 const playground = createHtmlElement('div', ['playground']);
 
@@ -16,11 +28,15 @@ function createCell(cellClassNames) {
   ) {
     cell.append(canvas);
     cell.addEventListener('click', (event) => {
+      const checkbox = document.querySelector('.sound');
+      // eslint-disable-next-line no-unused-expressions
+      checkbox.checked ? (isSoundEnabled = true) : (isSoundEnabled = false);
       const { target } = event;
       if (target.classList.contains('square')) {
         clearCell(target);
       } else {
         paintBlackSquare(target);
+        playSoundForBlackSquare(isSoundEnabled);
       }
     });
   }
@@ -52,7 +68,7 @@ export function createPlayground(fieldSize) {
     // eslint-disable-next-line no-param-reassign
     fieldSize = localStorage.getItem('fieldSize');
   }
-  console.log('F2', fieldSize);
+  // const cellsInRow = fieldSize.split('x')[0];
   const playgroundWrapper = createHtmlElement('div', ['playground-wrapper']);
   playground.innerHTML = '';
   let playgroundElement;
@@ -85,18 +101,8 @@ export function createPlayground(fieldSize) {
       playgroundElement = createCell(['cell', 'play']);
     }
   }
-  setTimeout(() => {
-    const cells = document.querySelectorAll('.play');
-    console.log('length', cells.length);
-    for (let j = 4; j <= cells.length - 1; j += 5) {
-      cells[j].style.borderRight = '3px solid #000';
-    }
-    for (let k = 60; k <= cells.length - 1; k += 75) {
-      for (let l = k; l < k + 15; l += 1) {
-        cells[l].style.borderBottom = '3px solid #000';
-      }
-    }
-  }, 100);
+  makeInnerBorderWider(fieldSize);
+  makeOuterBorderWider();
   playground.style.gridTemplateColumns = `repeat(${headerColCount}, ${cellSize})`;
   playground.style.gridTemplateRows = `repeat(${headerRowCount}, ${cellSize})`;
   playgroundWrapper.append(playgroundElement);
