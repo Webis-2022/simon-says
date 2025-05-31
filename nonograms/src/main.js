@@ -9,7 +9,7 @@ import './assets/css/styles.css';
 
 createStartPage();
 
-// localStorage.clear();
+// localStorage.removeItem('userData');
 
 function renderRoute(path, buttonNumber, defaultFieldSize) {
   clearPage();

@@ -13,6 +13,10 @@ import { addUserAnswersToArray } from '../utils/create-user-answers-array';
 import { retrieveSavedDraw } from '../utils/retrieve-saved-draw';
 import { clearPlayground } from '../utils/clear-playground';
 import { showSolution } from '../utils/show-solution';
+import { saveData } from '../utils/save-data';
+import { clearTimer, startTimer } from '../utils/timer';
+import { retrieveTimerValue } from '../utils/retrieve-timer-value';
+import { timerState } from '../components/playground/playground';
 
 export function returnButtonHandler() {
   createTemplateSizeSelectionPage();
@@ -31,15 +35,27 @@ export function selectRandomTemplateButtonHandler() {
 export function resetButtonHandler() {
   clearPlayground();
   addUserAnswersToArray();
+  clearTimer();
+  timerState.isTimerStarted = false;
 }
 
 export function saveButtonHandler() {
-
+  saveData();
+  const loadButton = document.querySelector('.load-button');
+  loadButton.removeAttribute('disabled');
 }
 
 export function loadButtonHandler() {
+  timerState.isTimerStarted = false;
+  timerState.wasTimerStartedBefore = timerState.isTimerStarted;
+  clearTimer();
   clearPlayground();
+  retrieveTimerValue();
   retrieveSavedDraw();
+  setTimeout(() => {
+    timerState.wasTimerStartedBefore = true;
+    startTimer();
+  }, 400);
 }
 
 export function showSolutionButtonHandler() {

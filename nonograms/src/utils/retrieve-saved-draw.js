@@ -1,9 +1,11 @@
 /* eslint-disable no-use-before-define */
 import { paintBlackSquare } from './paint-black-square';
+import { timerState } from '../components/playground/playground';
 
-const userAnswersArray = JSON.parse(localStorage.getItem('userAnswersArray'));
 
 export function retrieveSavedDraw() {
+  const userData = JSON.parse(localStorage.getItem('userData'));
+  const { userAnswersArray } = userData;
   const arrayOfArrays = createArrayOfArrays();
   drawImage(arrayOfArrays, userAnswersArray);
 }
@@ -28,7 +30,7 @@ export function drawImage(arrayOfCanvasCells, answersArray) {
       if (answersArray[i][j] === true) {
         const row = i;
         const index = j;
-        paintBlackSquare(arrayOfCanvasCells[row][index]);
+        paintBlackSquare(arrayOfCanvasCells[row][index], timerState.isTimerStarted);
       }
     }
   }

@@ -16,6 +16,7 @@ export function createButtonSet() {
   const saveButton = createButton('save-button', 'Save Game');
   saveButton.addEventListener('click', saveButtonHandler);
   const loadButton = createButton('load-button', 'Load Game');
+  loadButton.setAttribute('disabled', '');
   loadButton.addEventListener('click', loadButtonHandler);
   const showSolutionButton = createButton('show-solution-button', 'Solution');
   showSolutionButton.addEventListener('click', showSolutionButtonHandler);

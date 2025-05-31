@@ -9,6 +9,11 @@ import { makeInnerBorderWider, makeOuterBorderWider } from '../../utils/make-bor
 // localStorage.removeItem('isSoundEnabled')
 
 let isSoundEnabled;
+export const timerState = {
+  wasTimerStartedBefore: true,
+  isTimerStarted: false,
+};
+
 if (localStorage.getItem('isSoundEnabled') === null) {
   isSoundEnabled = true;
   localStorage.setItem('isSoundEnabled', isSoundEnabled);
@@ -35,8 +40,10 @@ function createCell(cellClassNames) {
       if (target.classList.contains('square')) {
         clearCell(target);
       } else {
-        paintBlackSquare(target);
+        paintBlackSquare(target, timerState.isTimerStarted, timerState.wasTimerStartedBefore);
         playSoundForBlackSquare(isSoundEnabled);
+        timerState.isTimerStarted = true;
+        timerState.wasTimerStartedBefore = true;
       }
     });
   }
@@ -75,7 +82,7 @@ export function createPlayground(fieldSize) {
   let cellsCount;
   let headerColCount;
   let headerRowCount;
-  const cellSize = 'minmax(auto, 25%)';
+  const cellSize = 'minmax(auto, 60%)';
 
   if (fieldSize === '5x5') {
     cellsCount = 35;
