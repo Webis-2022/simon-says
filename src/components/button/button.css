@@ -1,0 +1,38 @@
+.start-btn,
+.repeat-sequence__button,
+.new-game__button,
+.next-level__button {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.start-btn {
+  width: 50%;
+  background-color: #0d6efd;
+  margin: 80px auto;
+}
+
+.repeat-sequence__button:disabled,
+.new-game__button:disabled,
+.next-level__button:disabled {
+  background-color: #ccc;
+  color: rgb(138, 138, 138);
+  cursor: not-allowed;
+}
+
+.repeat-sequence__button,
+.new-game__button,
+.next-level__button {
+  width: 100%;
+  margin-right: 15px;
+  background: transparent;
+  border: solid 3px #fff;
+}

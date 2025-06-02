@@ -1,0 +1,26 @@
+.control-section__elements {
+  display: flex;
+  justify-content: space-between;
+  /* flex-direction: column; */
+  margin-top: 50px;
+}
+
+.difficulty-level {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+}
+
+.label {
+  margin-left: 15px;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.select {
+  margin-left: 15px;
+  min-width: 200px;
+  border-radius: 20px;
+  padding: 0.6rem;
+}

@@ -1,0 +1,24 @@
+.round-number__card {
+  width: 60px;
+  height: 80px;
+  background-color: #fff;
+  font-size: 68px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.375rem;
+}
+
+.invisible {
+  animation: opacity-animation 3s ease backwards;
+}
+
+@keyframes opacity-animation {
+  from {
+    opacity: 100%;
+  }
+
+  to {
+    opacity: 0%;
+  }
+}
