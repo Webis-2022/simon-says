@@ -1,27 +1,24 @@
 import { checkUserInput } from './check-user-input.js';
-import { savedRandomButtonsArr, savedIndexArr } from './run-game.js';
+import { savedRandomButtonsArr } from './run-game.js';
 import { highlightButton } from './highlight-button.js';
 import { disableRealKeyboardButtons } from './disable-real-keyboard-buttons.js';
-import { insertCharToInput } from './insert-char-to-input.js';
 export let clickedButtonsArr = [];
 
 export async function changeButtonColor(event, resolve) {
   const target = event.target;
+  let clickedButton =
+    event.key === undefined ? target.textContent : event.key.toUpperCase();
   const selectInputNumber = document.querySelector('.select').value;
-  if (disableRealKeyboardButtons(event, selectInputNumber)) {
-    event.preventDefault();
-  } else {
-    if (target.classList.contains('item')) {
-      clickedButtonsArr.push(target.textContent);
-      insertCharToInput(target.textContent);
+  if (event.key !== undefined) {
+    if (disableRealKeyboardButtons(event, selectInputNumber)) {
+      event.preventDefault();
     } else {
       clickedButtonsArr.push(event.key.toUpperCase());
     }
+  } else {
+    clickedButtonsArr.push(target.textContent);
   }
-
   let clickedButtonIndex;
-  let clickedButton =
-    event.key === undefined ? target.textContent : event.key.toUpperCase();
   const allButtons = document.querySelectorAll('.item');
   [...allButtons].forEach((button, index) => {
     if (button.textContent.includes(clickedButton)) {
